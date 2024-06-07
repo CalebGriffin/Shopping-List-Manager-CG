@@ -27,6 +27,15 @@ public class ShoppingListController : ControllerBase
         return Ok(list);
     }
 
+    [HttpGet("PrevBought")]
+    public async Task<IActionResult> GetPrevBoughtList()
+    {
+        var list = await _context.ShoppingLists
+            .Where(item => item.ListType == Item.ShoppingListType.PrevBought).ToListAsync();
+        
+        return Ok(list);
+    }
+
     [HttpPost("AddItemToBuy")]
     public async Task<IActionResult> AddItemToBuy([FromBody] Item item)
     {
@@ -73,6 +82,25 @@ public class ShoppingListController : ControllerBase
             return NotFound();
         
         item.IsImportant = !item.IsImportant;
+        _context.ShoppingLists.Update(item);
+        await _context.SaveChangesAsync();
+
+        return Ok(item);
+    }
+
+    [HttpPost("MoveItemToPrevBought/{id:Guid}")]
+    public async Task<IActionResult> MoveItemToPrevBought(Guid id)
+    {
+        var item = await _context.ShoppingLists.FindAsync(id);
+        if (item == null)
+            return NotFound();
+        
+        // Reset the values of the item and move it to the previously bought list
+        item.Amount = 0;
+        item.ListType = Item.ShoppingListType.PrevBought;
+        item.SortOrder = -1;
+        item.IsImportant = false;
+
         _context.ShoppingLists.Update(item);
         await _context.SaveChangesAsync();
 

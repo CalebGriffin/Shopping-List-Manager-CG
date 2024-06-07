@@ -79,6 +79,9 @@ graph LR
 - Task 2: 20 minutes
     - Added the ability to mark items as important
     - The important items are now displayed at the top of the list
-- Task 3:
+- Task 3: 20 minutes
+    - Added the previously bought list to the UI
+    - Added the ability to move items to the previously bought list
+    - Added the ability to delete items from the previously bought list
 - Task 4:
 - Task 5:

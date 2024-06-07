@@ -25,6 +25,9 @@
             <button class="btn btn-warning" (click)="toggleItemImportance(item.id)"><i class="bi-asterisk"></i></button>
           </div>
           <div class="btn-group me-1" role="group">
+            <button class="btn btn-success" (click)="moveItemToPrevBought(item.id)"><i class="bi-check-lg"></i></button>
+          </div>
+          <div class="btn-group me-1" role="group">
             <button class="btn btn-danger" (click)="deleteItem(item.id)"><i class="bi-trash-fill"></i></button>
           </div>
         </div>
@@ -35,6 +38,25 @@
       <td><input type="text" class="form-control" placeholder="Item Name" [(ngModel)]="newItem.name" /></td>
       <td>
         <button class="btn btn-primary" (click)="addItemToBuy()"><i class="bi-plus-lg"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Previously Bought Items</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of prevBoughtList" class="align-middle">
+      <td>{{ item.name }}</td>
+      <td>
+          <button class="btn btn-danger" (click)="deleteItem(item.id)"><i class="bi-trash-fill"></i></button>
       </td>
     </tr>
   </tbody>

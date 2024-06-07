@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent {
   public toBuyList: Item[] = [];
 
+  public prevBoughtList: Item[] = [];
+
   private readonly defaultItem: Item = {
     id: '00000000-0000-0000-0000-000000000000',
     name: '',
@@ -37,6 +39,13 @@ export class HomeComponent {
       },
       error: (error) => console.error(error)
     });
+
+    this.http.get<Item[]>(`${this.baseUrl}api/ShoppingList/PrevBought`).subscribe({
+      next: (result) => {
+        this.prevBoughtList = result;
+      },
+      error: (error) => console.error(error)
+    });
   }
 
   addItemToBuy() {
@@ -58,6 +67,13 @@ export class HomeComponent {
 
   toggleItemImportance(id: string) {
     this.http.post(`${this.baseUrl}api/ShoppingList/ToggleItemImportance/${id}`, null).subscribe({
+      next: () => this.refreshLists(),
+      error: (error) => console.error(error)
+    });
+  }
+
+  moveItemToPrevBought(id: string) {
+    this.http.post(`${this.baseUrl}api/ShoppingList/MoveItemToPrevBought/${id}`, null).subscribe({
       next: () => this.refreshLists(),
       error: (error) => console.error(error)
     });
