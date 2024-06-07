@@ -2,7 +2,7 @@
 ##### Made by Caleb Griffin
 
 ## Demo Video
-[![Watch a demo of the project here](https://youtu.be/iSAyQRZFFgY)](https://youtu.be/iSAyQRZFFgY)
+[![Watch a demo of the project here](https://img.youtube.com/vi/iSAyQRZFFgY/0.jpg)](https://www.youtube.com/watch?v=iSAyQRZFFgY)
 
 I've included a demo video because the SQL server that I'm using has security restrictions meaning that only ip addresses that I've whitelisted can access it. If you email me your **public** ip address then I can add it to the whitelist and you can access and test the project yourself.
 
