@@ -10,6 +10,8 @@ export class HomeComponent {
 
   public prevBoughtList: Item[] = [];
 
+  protected sortMode: SortMode = SortMode.Alphabetical;
+
   private readonly defaultItem: Item = {
     id: '00000000-0000-0000-0000-000000000000',
     name: '',
@@ -78,6 +80,30 @@ export class HomeComponent {
       error: (error) => console.error(error)
     });
   }
+
+  changeSortMode(newMode: number) {
+    this.sortMode = newMode;
+
+    this.http.post(`${this.baseUrl}api/ShoppingList/ChangeSortMode/${newMode}`, null).subscribe({
+      next: () => this.refreshLists(),
+      error: (error) => console.error(error)
+    });
+  }
+
+  moveItem(id: string, direction: number) {
+    // If the user manually changes the sort order of an item, we need to switch to custom sort mode
+    this.changeSortMode(SortMode.Custom);
+
+    this.http.post(`${this.baseUrl}api/ShoppingList/MoveItem/${id}/${direction}`, null).subscribe({
+      next: () => this.refreshLists(),
+      error: (error) => console.error(error)
+    });
+  }
+}
+
+enum SortMode {
+  Alphabetical = 0,
+  Custom = 1
 }
 
 interface Item {

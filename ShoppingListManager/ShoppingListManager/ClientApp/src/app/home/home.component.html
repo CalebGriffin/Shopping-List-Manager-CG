@@ -2,6 +2,13 @@
 
 <h3>Items to Buy</h3>
 
+<h5>Sort Mode:</h5>
+
+<p class="d-inline-flex gap-1">
+  <button type="button" class="btn" [class.active]="sortMode === 0" (click)="changeSortMode(0)">Alphabetical</button>
+  <button type="button" class="btn" [class.active]="sortMode === 1" (click)="changeSortMode(1)">Custom</button>
+</p>
+
 <table class="table">
   <thead>
     <tr>
@@ -21,6 +28,10 @@
       </td>
       <td>
         <div class="btn-toolbar" role="toolbar">
+          <div class="btn-group me-1" role="group">
+            <button class="btn btn-secondary" (click)="moveItem(item.id, -1)"><i class="bi-arrow-up"></i></button>
+            <button class="btn btn-secondary" (click)="moveItem(item.id, 1)"><i class="bi-arrow-down"></i></button>
+          </div>
           <div class="btn-group me-1" role="group">
             <button class="btn btn-warning" (click)="toggleItemImportance(item.id)"><i class="bi-asterisk"></i></button>
           </div>
