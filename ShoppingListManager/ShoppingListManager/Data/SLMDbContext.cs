@@ -7,5 +7,5 @@ public class SLMDbContext : DbContext
 {
     public SLMDbContext(DbContextOptions<SLMDbContext> options) : base(options) { }
 
-    public DbSet<Item> Items { get; set; }
+    public DbSet<Item> ShoppingLists { get; set; }
 }

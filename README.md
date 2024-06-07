@@ -69,7 +69,11 @@ graph LR
 
 ## Time Spent
 - Setup and Planning: 1 hour
-- Task 1:
+- Task 1: 2 hours
+    - Created foundation for the front end, back end, and database
+    - Connected front end -> back end -> database
+    - Added the ability to display the ToBuy list
+    - Added the ability to add and remove items from the ToBuy list
 - Task 2:
 - Task 3:
 - Task 4:
