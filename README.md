@@ -1,6 +1,13 @@
 # Shopping List Manager
 ##### Made by Caleb Griffin
 
+## Demo Video
+[![Watch a demo of the project here](https://youtu.be/iSAyQRZFFgY)]
+
+I've included a demo video because the SQL server that I'm using has security restrictions meaning that only ip addresses that I've whitelisted can access it. If you email me your **public** ip address then I can add it to the whitelist and you can access and test the project yourself.
+
+The rest of this document contains the planning that I did at the start of the project and the time that I spent on each task.
+
 ## Notes and Planning
 ### Required Features
 - 2 lists: To buy list and previously bought list
@@ -90,3 +97,7 @@ graph LR
 - **Task 5: 10 minutes**
     - Added the ability to add an item from the previously bought list to the ToBuy list
     - If the item already exists in the ToBuy list then the amount is increased by 1 instead
+- **Extras: 20 minutes**
+    - Added a favicon to the website
+    - Recorded a video of the project
+    - Uploaded the project to GitHub
