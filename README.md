@@ -69,12 +69,16 @@ graph LR
 
 ## Time Spent
 - Setup and Planning: 1 hour
+    - Created the Angular and C# project using Visual Studio
+    - Planned the project structure and features (this document)
 - Task 1: 2 hours
     - Created foundation for the front end, back end, and database
     - Connected front end -> back end -> database
     - Added the ability to display the ToBuy list
     - Added the ability to add and remove items from the ToBuy list
-- Task 2:
+- Task 2: 20 minutes
+    - Added the ability to mark items as important
+    - The important items are now displayed at the top of the list
 - Task 3:
 - Task 4:
 - Task 5:

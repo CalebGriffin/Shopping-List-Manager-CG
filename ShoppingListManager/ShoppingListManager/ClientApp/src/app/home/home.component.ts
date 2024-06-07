@@ -55,6 +55,13 @@ export class HomeComponent {
       error: (error) => console.error(error)
     });
   }
+
+  toggleItemImportance(id: string) {
+    this.http.post(`${this.baseUrl}api/ShoppingList/ToggleItemImportance/${id}`, null).subscribe({
+      next: () => this.refreshLists(),
+      error: (error) => console.error(error)
+    });
+  }
 }
 
 interface Item {

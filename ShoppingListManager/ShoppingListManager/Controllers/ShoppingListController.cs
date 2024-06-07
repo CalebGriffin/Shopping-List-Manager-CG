@@ -21,6 +21,8 @@ public class ShoppingListController : ControllerBase
     {
         var list = await _context.ShoppingLists
             .Where(item => item.ListType == Item.ShoppingListType.ToBuy).ToListAsync();
+
+        list = list.OrderBy(i => !i.IsImportant).ToList();
         
         return Ok(list);
     }
@@ -58,6 +60,20 @@ public class ShoppingListController : ControllerBase
             return NotFound();
         
         _context.ShoppingLists.Remove(item);
+        await _context.SaveChangesAsync();
+
+        return Ok(item);
+    }
+
+    [HttpPost("ToggleItemImportance/{id:Guid}")]
+    public async Task<IActionResult> ToggleItemImportance(Guid id)
+    {
+        var item = await _context.ShoppingLists.FindAsync(id);
+        if (item == null)
+            return NotFound();
+        
+        item.IsImportant = !item.IsImportant;
+        _context.ShoppingLists.Update(item);
         await _context.SaveChangesAsync();
 
         return Ok(item);
