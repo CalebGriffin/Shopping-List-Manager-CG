@@ -81,6 +81,13 @@ export class HomeComponent {
     });
   }
 
+  addItemFromPrevBought(id: string) {
+    this.http.post(`${this.baseUrl}api/ShoppingList/AddItemFromPrevBought/${id}`, null).subscribe({
+      next: () => this.refreshLists(),
+      error: (error) => console.error(error)
+    });
+  }
+
   changeSortMode(newMode: number) {
     this.sortMode = newMode;
 

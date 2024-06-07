@@ -87,4 +87,6 @@ graph LR
     - Added the sorting modes to the ToBuy list
     - Added the ability to sort either alphabetically or with the custom sort order
     - Added the ability to move the items up and down in the ToBuy list
-- **Task 5:**
+- **Task 5: 10 minutes**
+    - Added the ability to add an item from the previously bought list to the ToBuy list
+    - If the item already exists in the ToBuy list then the amount is increased by 1 instead

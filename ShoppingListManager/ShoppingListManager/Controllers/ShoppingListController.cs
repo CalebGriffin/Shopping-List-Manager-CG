@@ -147,6 +147,48 @@ public class ShoppingListController : ControllerBase
         return Ok(item);
     }
 
+    [HttpPost("AddItemFromPrevBought/{id:Guid}")]
+    public async Task<IActionResult> AddItemFromPrevBought(Guid id)
+    {
+        var item = await _context.ShoppingLists.FindAsync(id);
+        if (item == null)
+            return NotFound();
+        
+        // If the item exists in the to buy list, increase the amount by 1
+        var existingItem = await _context.ShoppingLists
+            .Where(i => i.ListType == Item.ShoppingListType.ToBuy && i.Name == item.Name)
+            .FirstOrDefaultAsync();
+        if (existingItem != null)
+        {
+            existingItem.Amount++;
+            _context.ShoppingLists.Update(existingItem);
+            await _context.SaveChangesAsync();
+            return Ok(existingItem);
+        }
+
+        // Else, add the item to the to buy list with an amount of 1
+        // Get the current sort mode of the to buy list
+        Item.SortMode sortMode = await _context.ShoppingLists
+            .Where(i => i.ListType == Item.ShoppingListType.ToBuy)
+            .Select(i => i.CurrentSortMode)
+            .FirstOrDefaultAsync();
+        
+        // Set the values of the new item
+        var newItem = new Item
+        {
+            Id = Guid.NewGuid(),
+            Name = item.Name,
+            Amount = 1,
+            IsImportant = false,
+            SortOrder = await _context.ShoppingLists
+                .Where(i => i.ListType == Item.ShoppingListType.ToBuy && !i.IsImportant).CountAsync(),
+            ListType = Item.ShoppingListType.ToBuy,
+            CurrentSortMode = sortMode
+        };
+        
+        return await AddItemToBuy(newItem);
+    }
+
     [HttpPost("ChangeSortMode/{sortMode:int}")]
     public async Task<IActionResult> ChangeSortMode(int sortMode)
     {
