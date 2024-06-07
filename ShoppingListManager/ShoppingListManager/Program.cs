@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<SLMDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SLMDbContext"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SLMDbConnectionString"));
 });
 
 var app = builder.Build();
@@ -23,7 +23,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",
